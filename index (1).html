@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spices Annex Restaurant & Meeting Place</title>
+  <meta name="description" content="Spices Annex Restaurant and Meeting Place — authentic flavors, warm hospitality, and premium meeting facilities." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-dark: #8B6914;
+      --spice: #8B2500;
+      --spice-light: #F5E8E0;
+      --cream: #FAF6EF;
+      --dark: #1A1208;
+      --text: #3A2D1C;
+      --muted: #7A6A55;
+      --nav-h: 72px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      background: transparent;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(26,18,8,0.96);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 24px; height: 1.5px; background: #fff; transition: all 0.3s; display: block; }
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; background: var(--dark);
+      z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: #fff; text-decoration: none; font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; font-weight: 400; transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-close {
+      position: absolute; top: 1.5rem; right: 5vw;
+      background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background:
+        linear-gradient(to bottom, rgba(26,18,8,0.55) 0%, rgba(26,18,8,0.3) 50%, rgba(26,18,8,0.7) 100%),
+        url('images/hero-bg.jpg') center/cover no-repeat;
+      background-color: #3A2010;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      padding: calc(var(--nav-h) + 2rem) 5vw 4rem;
+    }
+    .hero-inner { max-width: 760px; }
+    .hero-tag {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-inner h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+    .hero-inner h1 em { color: var(--gold); font-style: italic; }
+    .hero-inner p {
+      color: rgba(255,255,255,0.78);
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      line-height: 1.7;
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+    }
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--dark);
+      padding: 14px 32px; border-radius: 3px;
+      text-decoration: none; font-weight: 500; font-size: 0.88rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: #e0b75a; transform: translateY(-1px); }
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.6); color: #fff;
+      padding: 14px 32px; border-radius: 3px;
+      text-decoration: none; font-weight: 400; font-size: 0.88rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── SECTION BASE ── */
+    section { padding: 6rem 5vw; }
+    .section-label {
+      font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold-dark); font-weight: 500; margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600; color: var(--dark); line-height: 1.15;
+    }
+    .divider {
+      width: 48px; height: 2px; background: var(--gold);
+      margin: 1.2rem 0 1.8rem;
+    }
+    .section-body { max-width: 1100px; margin: 0 auto; }
+
+    /* ── ABOUT ── */
+    #about { background: #fff; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img-wrap img,
+    .about-img-placeholder {
+      width: 100%; aspect-ratio: 4/5; object-fit: cover;
+      border-radius: 4px;
+    }
+    .about-img-placeholder {
+      background: linear-gradient(135deg, #D4A96A 0%, #8B2500 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.3);
+      font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+      letter-spacing: 0.1em;
+    }
+    .about-accent {
+      position: absolute; bottom: -1.5rem; right: -1.5rem;
+      width: 60%; aspect-ratio: 1;
+      border: 2px solid var(--gold);
+      border-radius: 4px;
+      z-index: -1;
+    }
+    .about-text p {
+      color: var(--muted); line-height: 1.85; margin-bottom: 1.2rem;
+      font-size: 0.97rem;
+    }
+    .about-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 2.5rem;
+      padding-top: 2rem; border-top: 1px solid #EEDDC8;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 600; color: var(--spice);
+    }
+    .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+
+    /* ── MENU ── */
+    #menu { background: var(--cream); }
+    .menu-tabs {
+      display: flex; gap: 0; margin-bottom: 3rem;
+      border-bottom: 1px solid #DDD0BC; max-width: 1100px; margin: 0 auto 3rem;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      background: none; border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      padding: 12px 24px; border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s; white-space: nowrap;
+    }
+    .tab-btn.active { color: var(--spice); border-color: var(--spice); }
+    .menu-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2px; max-width: 1100px; margin: 0 auto;
+    }
+    .menu-panel { display: none; }
+    .menu-panel.active {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2px;
+    }
+    .menu-item {
+      background: #fff;
+      padding: 1.6rem 1.8rem;
+      transition: box-shadow 0.2s;
+    }
+    .menu-item:hover { box-shadow: inset 3px 0 0 var(--gold); }
+    .menu-item-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+    .menu-item h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--dark); }
+    .menu-price { font-size: 0.95rem; color: var(--spice); font-weight: 500; white-space: nowrap; }
+    .menu-item p { font-size: 0.84rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── MEETINGS ── */
+    #meetings { background: var(--dark); }
+    #meetings .section-label { color: var(--gold); }
+    #meetings .section-title { color: #fff; }
+    #meetings .divider { background: var(--gold); }
+    .meetings-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1px; max-width: 1100px; margin: 3rem auto 0;
+    }
+    .meeting-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 2rem 1.8rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .meeting-card:hover { background: rgba(201,168,76,0.07); border-color: rgba(201,168,76,0.5); }
+    .meeting-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+    .meeting-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: #fff; margin-bottom: 0.6rem; }
+    .meeting-card p { font-size: 0.84rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
+    .meetings-cta { text-align: center; margin-top: 3.5rem; }
+
+    /* ── GALLERY ── */
+    #gallery { background: #fff; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      gap: 8px; max-width: 1100px; margin: 2.5rem auto 0;
+    }
+    .gallery-item {
+      overflow: hidden; border-radius: 3px;
+      aspect-ratio: 4/3;
+    }
+    .gallery-item:first-child { grid-column: span 2; aspect-ratio: 16/7; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .gallery-item:hover img { transform: scale(1.04); }
+    .gallery-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+    }
+    .gp1 { background: linear-gradient(135deg, #C9A84C, #8B2500); }
+    .gp2 { background: linear-gradient(135deg, #5C3A1E, #C9A84C); }
+    .gp3 { background: linear-gradient(135deg, #8B2500, #3A2D1C); }
+    .gp4 { background: linear-gradient(135deg, #3A2D1C, #8B6914); }
+    .gp5 { background: linear-gradient(135deg, #C9A84C, #5C3A1E); }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--spice-light); }
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; max-width: 1100px; margin: 2.5rem auto 0;
+    }
+    .testimonial-card {
+      background: #fff;
+      padding: 2rem 1.8rem;
+      border-radius: 4px;
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '"';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem; line-height: 1;
+      color: var(--gold); opacity: 0.3;
+      position: absolute; top: 0.5rem; left: 1rem;
+    }
+    .testimonial-card p {
+      font-style: italic; color: var(--muted);
+      line-height: 1.75; font-size: 0.94rem; margin-bottom: 1.2rem;
+      position: relative; z-index: 1;
+    }
+    .testimonial-author { font-weight: 500; font-size: 0.84rem; color: var(--dark); }
+    .stars { color: var(--gold); font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 1rem; }
+
+    /* ── CONTACT ── */
+    #contact { background: #fff; }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; max-width: 1100px; margin: 0 auto;
+      align-items: start;
+    }
+    .contact-details { display: flex; flex-direction: column; gap: 1.8rem; }
+    .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .contact-icon {
+      width: 40px; height: 40px; min-width: 40px;
+      background: var(--spice-light); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .contact-item h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 4px; }
+    .contact-item p, .contact-item a { font-size: 0.94rem; color: var(--text); text-decoration: none; }
+    .contact-item a:hover { color: var(--spice); }
+    .map-placeholder {
+      width: 100%; aspect-ratio: 4/3;
+      background: #EDE8E0; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 0.5rem;
+      color: var(--muted); font-size: 0.85rem;
+      border: 1px solid #DDD0BC;
+    }
+    .map-placeholder .map-pin { font-size: 2rem; }
+    .map-note { font-size: 0.78rem; color: #aaa; margin-top: 4px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark); padding: 3rem 5vw;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.2rem;
+      color: #fff; letter-spacing: 0.04em;
+    }
+    .footer-logo span { color: var(--gold); }
+    footer p { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
+    .social-links { display: flex; gap: 1rem; }
+    .social-links a {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(255,255,255,0.2); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.8rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .social-links a:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-accent { display: none; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item:first-child { grid-column: span 2; }
+      section { padding: 4rem 5vw; }
+    }
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:first-child { grid-column: span 1; }
+      .about-stats { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+      .stat-num { font-size: 1.8rem; }
+    }
+
+    /* ── FADE IN ── */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Spices <span>Annex</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#meetings">Meetings</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">&times;</button>
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#menu" class="mobile-link">Menu</a>
+  <a href="#meetings" class="mobile-link">Meetings</a>
+  <a href="#gallery" class="mobile-link">Gallery</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Restaurant &amp; Meeting Place</div>
+    <h1>Where <em>Flavour</em><br>Meets Purpose</h1>
+    <p>A destination for exceptional dining and professional gatherings — rich spices, warm hospitality, and spaces that inspire.</p>
+    <div class="hero-ctas">
+      <a href="#menu" class="btn-primary">View Our Menu</a>
+      <a href="#contact" class="btn-outline">Book a Table</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid fade-in">
+    <div class="about-img-wrap">
+      <!-- Replace src with your actual image path -->
+      <div class="about-img-placeholder">
+        Add your restaurant photo here
+      </div>
+      <div class="about-accent"></div>
+    </div>
+    <div class="about-text">
+      <p class="section-label">Our Story</p>
+      <h2 class="section-title">More Than a<br>Restaurant</h2>
+      <div class="divider"></div>
+      <p>Spices Annex was founded on a simple belief: great food and great company go hand in hand. We source fresh ingredients daily, crafting dishes that celebrate bold, authentic flavours from local and regional traditions.</p>
+      <p>Beyond dining, we offer thoughtfully designed spaces for meetings, workshops, and private events — because we know that some of the best ideas are born over a good meal.</p>
+      <div class="about-stats">
+        <div>
+          <div class="stat-num">12+</div>
+          <div class="stat-label">Years Serving</div>
+        </div>
+        <div>
+          <div class="stat-num">80</div>
+          <div class="stat-label">Seat Capacity</div>
+        </div>
+        <div>
+          <div class="stat-num">3</div>
+          <div class="stat-label">Meeting Rooms</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="section-body fade-in">
+    <p class="section-label">What We Serve</p>
+    <h2 class="section-title">Our Menu</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="menu-tabs" role="tablist">
+    <button class="tab-btn active" onclick="switchTab(this,'breakfast')" role="tab">Breakfast</button>
+    <button class="tab-btn" onclick="switchTab(this,'dishes')" role="tab">Dishes</button>
+    <button class="tab-btn" onclick="switchTab(this,'meats')" role="tab">Meats</button>
+    <button class="tab-btn" onclick="switchTab(this,'sides')" role="tab">Sides</button>
+    <button class="tab-btn" onclick="switchTab(this,'drinks')" role="tab">Drinks</button>
+  </div>
+
+  <!-- BREAKFAST -->
+  <div id="tab-breakfast" class="menu-panel active">
+    <div class="menu-item"><div class="menu-item-top"><h3>Andazi (Pair)</h3><span class="menu-price">Ksh 75</span></div><p>Sweet and fluffy, a delightful Kenyan treat.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>African Tea - Mug</h3><span class="menu-price">Ksh 100</span></div><p>Traditional blend, aromatic and comforting.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Ngwaci</h3><span class="menu-price">Ksh 75</span></div><p>Sweet potatoes cooked to soft perfection.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Black Chocolate</h3><span class="menu-price">Ksh 100</span></div><p>Rich cocoa blend, warming the soul.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Milk Coffee</h3><span class="menu-price">Ksh 170</span></div><p>Perfect blend of milk and coffee, creamy latte flavor.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Milk Cup</h3><span class="menu-price">Ksh 145</span></div><p>Fresh and creamy, pure enjoyment.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Omelette</h3><span class="menu-price">Ksh 215</span></div><p>Fluffy, filled with fresh ingredients for a hearty meal.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Lemon Tea + Honey</h3><span class="menu-price">Ksh 215</span></div><p>Sweet and citrusy, a soothing drink.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Masala Tea</h3><span class="menu-price">Ksh 145</span></div><p>Spicy and aromatic, a flavorful journey.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Milk Chocolate</h3><span class="menu-price">Ksh 170</span></div><p>Creamy indulgence, with a touch of sweetness.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Fried Eggs</h3><span class="menu-price">Ksh 145</span></div><p>Perfectly fried eggs, golden and enticing.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Sausage Beef (Pair)</h3><span class="menu-price">Ksh 215</span></div><p>Succulent beef sausages with rich taste.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Black Coffee</h3><span class="menu-price">Ksh 100</span></div><p>Bold and robust, awakening your senses.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Samosa (Pair)</h3><span class="menu-price">Ksh 215</span></div><p>Golden crispy pastry filled with savory spiced meat.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Black Tea</h3><span class="menu-price">Ksh 100</span></div><p>Classic tea, steeped to perfection.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Pancake (Pair)</h3><span class="menu-price">Ksh 170</span></div><p>Soft and golden, served with syrup or jam.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Dropscones</h3><span class="menu-price">Ksh 85</span></div><p>Rich, sweet fried dough, perfect with tea.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Lemon Tea</h3><span class="menu-price">Ksh 170</span></div><p>Refreshing lemon notes in every sip.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Sausage Pork (Pair)</h3><span class="menu-price">Ksh 215</span></div><p>Juicy pork sausages, bursting with flavor.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Nduma</h3><span class="menu-price">Ksh 100</span></div><p>Taro roots cooked to a nutritious delight.</p></div>
+  </div>
+
+  <!-- DISHES -->
+  <div id="tab-dishes" class="menu-panel">
+    <div class="menu-item"><div class="menu-item-top"><h3>Beans Plain</h3><span class="menu-price">Ksh 215</span></div><p>Hearty beans, seasoned and cooked slowly for maximum flavor.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Ndengu Plain</h3><span class="menu-price">Ksh 215</span></div><p>Tender green grams, savory and nutritious.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Pilau Special</h3><span class="menu-price">Ksh 425</span></div><p>Special blend of spiced rice, cooked to aromatic perfection.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Tumbukiza (1KG)</h3><span class="menu-price">Ksh 1,695</span></div><p>Goat meat stewed in flavorful spices, tender and tasty.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Liver Fry</h3><span class="menu-price">Ksh 495</span></div><p>Soft liver bites cooked in a zesty sauce, bursting with taste.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Mukimo Special</h3><span class="menu-price">Ksh 215</span></div><p>Mashed potatoes with greens, a comforting dish.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Tilapia</h3><span class="menu-price">Ksh 705</span></div><p>Whole tilapia, seasoned and cooked to perfection.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Rice</h3><span class="menu-price">Ksh 145</span></div><p>Fluffy rice, cooked perfectly for your main course.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Githeri Special</h3><span class="menu-price">Ksh 355</span></div><p>Our special twist on the traditional corn and beans dish.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Kitchen Soup</h3><span class="menu-price">Ksh 75</span></div><p>Warm broth infused with flavors to complement any dish.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Beef Fry</h3><span class="menu-price">Ksh 355</span></div><p>Succulent beef pieces cooked in a flavorful sauce.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Kuku Bahati</h3><span class="menu-price">Ksh 3,525</span></div><p>Special chicken dish cooked with a unique blend of flavors for an exceptional experience.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Pilau</h3><span class="menu-price">Ksh 285</span></div><p>Aromatic spiced rice, a taste of the tropics.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Githeri Plain</h3><span class="menu-price">Ksh 215</span></div><p>Classic Kenyan dish of corn and beans, simple yet satisfying.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Chicken Fry</h3><span class="menu-price">Ksh 565</span></div><p>Moist chicken pieces bathed in a savory marinade.</p></div>
+  </div>
+
+  <!-- MEATS -->
+  <div id="tab-meats" class="menu-panel">
+    <div class="menu-item"><div class="menu-item-top"><h3>Mbuzi Choma (1KG)</h3><span class="menu-price">Ksh 1,410</span></div><p>Grilled goat meat, rich in flavor and expertly spiced.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Matumbo Fry</h3><span class="menu-price">Ksh 285</span></div><p>Rich and tender tripe cooked in savory spices.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Mbuzi Spiced (1KG)</h3><span class="menu-price">Ksh 1,835</span></div><p>Goat meat marinated in a rich blend of spices, cooked tender and tasty.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Pork (1KG)</h3><span class="menu-price">Ksh 1,410</span></div><p>Juicy pork, expertly spiced and cooked to bring out its natural flavors.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Fry Mbuzi (1KG)</h3><span class="menu-price">Ksh 1,695</span></div><p>Perfectly fried to a golden brown, full of taste.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Mbuzi Fry</h3><span class="menu-price">Ksh 425</span></div><p>Juicy goat meat simmered in rich flavors, a true delicacy.</p></div>
+  </div>
+
+  <!-- SIDES -->
+  <div id="tab-sides" class="menu-panel">
+    <div class="menu-item"><div class="menu-item-top"><h3>Sukuma</h3><span class="menu-price">Ksh 75</span></div><p>Fresh greens cooked to retain their natural taste.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Chips</h3><span class="menu-price">Ksh 215</span></div><p>Golden, crisp and perfectly salted fries.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Ulimi</h3><span class="menu-price">Ksh 425</span></div><p>Savory cow tongue cooked to tender perfection, rich in flavor.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Mboga Kienyeji</h3><span class="menu-price">Ksh 145</span></div><p>Traditional indigenous greens, cooked to perfection.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Soup</h3><span class="menu-price">Ksh 75</span></div><p>Delicious broth, savory and heartwarming.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Masala Chips</h3><span class="menu-price">Ksh 285</span></div><p>Fries tossed in spicy and tangy masala seasoning.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Chapati</h3><span class="menu-price">Ksh 75</span></div><p>Soft and layered flatbread, ideal with any meal.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Ugali</h3><span class="menu-price">Ksh 145</span></div><p>Traditional Kenyan staple, perfect for any meal.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Sauté Potatoes</h3><span class="menu-price">Ksh 285</span></div><p>Golden potatoes sautéed to crispy perfection.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Spinach</h3><span class="menu-price">Ksh 85</span></div><p>Delicious spinach cooked to a vibrant green, full of nutrients.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Mutura</h3><span class="menu-price">Ksh 285</span></div><p>Kenyan sausage, packed with spicy and savory flavors.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Brown Chapati</h3><span class="menu-price">Ksh 100</span></div><p>A healthier take on classic chapati, rich in fiber.</p></div>
+  </div>
+
+  <!-- DRINKS -->
+  <div id="tab-drinks" class="menu-panel">
+    <div class="menu-item"><div class="menu-item-top"><h3>Gofrut 1 Litre</h3><span class="menu-price">Ksh 425</span></div><p>Fruit-infused beverage, bursting with taste.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Dawa</h3><span class="menu-price">Ksh 145</span></div><p>Traditional remedy with honey, ginger, and lemon.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Water 1 Litre</h3><span class="menu-price">Ksh 145</span></div><p>Plenty of hydration in a bottle.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Classical Lemonade</h3><span class="menu-price">Ksh 215</span></div><p>Tart and sweet, a refreshing mix.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Cocktail Fresh Juice</h3><span class="menu-price">Ksh 215</span></div><p>Exotic blend of fruits, a juicy delight.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Uji Calabash</h3><span class="menu-price">Ksh 145</span></div><p>Warm and hearty, traditional porridge.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Fanta Orange 500ml</h3><span class="menu-price">Ksh 145</span></div><p>Fizzy and refreshing, a classic choice.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Sprite 500ml</h3><span class="menu-price">Ksh 145</span></div><p>Crisp, cool and refreshing.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Water 500ml</h3><span class="menu-price">Ksh 75</span></div><p>Pure refreshment, crisp and clear.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Coca-Cola Original 500ml</h3><span class="menu-price">Ksh 145</span></div><p>Fizzy and refreshing, a classic choice.</p></div>
+    <div class="menu-item"><div class="menu-item-top"><h3>Mango Fresh Juice</h3><span class="menu-price">Ksh 215</span></div><p>Sweet and tropical, full of fresh flavor.</p></div>
+  </div>
+</section>
+
+<!-- MEETINGS -->
+<section id="meetings">
+  <div class="section-body fade-in">
+    <p class="section-label">Facilities</p>
+    <h2 class="section-title" style="color:#fff;">Meetings &amp;<br>Private Events</h2>
+    <div class="divider"></div>
+    <p style="color:rgba(255,255,255,0.6); max-width:540px; line-height:1.8; font-size:0.96rem;">
+      We offer well-equipped, air-conditioned meeting rooms for corporate gatherings, training sessions, workshops, and private celebrations. All packages include catering options.
+    </p>
+  </div>
+  <div class="meetings-grid fade-in">
+    <div class="meeting-card">
+      <div class="meeting-icon">📋</div>
+      <h3>Boardroom</h3>
+      <p>Seats up to 12 people. Projector, whiteboard, and high-speed Wi-Fi included. Perfect for executive meetings.</p>
+    </div>
+    <div class="meeting-card">
+      <div class="meeting-icon">🎓</div>
+      <h3>Training Room</h3>
+      <p>Seats 30 in classroom style. Ideal for workshops, seminars, and training sessions with full AV equipment.</p>
+    </div>
+    <div class="meeting-card">
+      <div class="meeting-icon">🎉</div>
+      <h3>Private Dining</h3>
+      <p>An intimate space for up to 20 guests. Perfect for celebrations, team lunches, and private dinners.</p>
+    </div>
+    <div class="meeting-card">
+      <div class="meeting-icon">🍽️</div>
+      <h3>Full Catering</h3>
+      <p>Custom menus for your event — tea breaks, buffet lunch, cocktail snacks, or sit-down dinners.</p>
+    </div>
+  </div>
+  <div class="meetings-cta">
+    <a href="#contact" class="btn-primary">Enquire About Bookings</a>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-body fade-in">
+    <p class="section-label">Atmosphere</p>
+    <h2 class="section-title">Gallery</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="gallery-grid fade-in">
+    <!-- Replace these with real <img> tags pointing to your photos -->
+    <div class="gallery-item"><div class="gallery-placeholder gp1">Interior & Ambiance</div></div>
+    <div class="gallery-item"><div class="gallery-placeholder gp2">Signature Dishes</div></div>
+    <div class="gallery-item"><div class="gallery-placeholder gp3">Grills & Nyama Choma</div></div>
+    <div class="gallery-item"><div class="gallery-placeholder gp4">Meeting Room</div></div>
+    <div class="gallery-item"><div class="gallery-placeholder gp5">Private Events</div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-body fade-in">
+    <p class="section-label">What People Say</p>
+    <h2 class="section-title">Guest Reviews</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="testimonials-grid fade-in">
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p>The pilau here is absolutely unmatched in Nairobi. Rich flavour, generous portions, and the staff make you feel right at home. Our team's go-to for lunch meetings.</p>
+      <div class="testimonial-author">— James M., Regular Guest</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p>We hosted our annual company training here. The boardroom was immaculate, the catering was excellent, and the team was incredibly accommodating throughout the day.</p>
+      <div class="testimonial-author">— Sandra K., Corporate Client</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★☆</div>
+      <p>Wonderful ambiance for a birthday dinner. The nyama choma was perfectly done and the private dining space gave us all the privacy we needed. Highly recommend!</p>
+      <div class="testimonial-author">— Brian O., Private Event Guest</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid fade-in">
+    <div>
+      <p class="section-label">Find Us</p>
+      <h2 class="section-title">Visit &amp;<br>Contact Us</h2>
+      <div class="divider"></div>
+      <div class="contact-details">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <h4>Address</h4>
+            <!-- UPDATE THIS -->
+            <p>123 Spices Annex Road, Nairobi, Kenya</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <h4>Phone</h4>
+            <!-- UPDATE THIS -->
+            <a href="tel:+254700000000">+254 700 000 000</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <h4>Email</h4>
+            <!-- UPDATE THIS -->
+            <a href="mailto:info@spicesannex.co.ke">info@spicesannex.co.ke</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <h4>Hours</h4>
+            <p>Mon – Fri: 7:00 AM – 10:00 PM<br>Sat – Sun: 8:00 AM – 11:00 PM</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <!-- To embed a real map: go to Google Maps, search your location,
+           click Share > Embed a map, copy the <iframe> code and paste it here -->
+      <div class="map-placeholder">
+        <div class="map-pin">📍</div>
+        <p>Embed Google Maps here</p>
+        <p class="map-note">Go to maps.google.com → Share → Embed a map → Copy &lt;iframe&gt;</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Spices <span>Annex</span></div>
+    <p style="margin-top:6px;">Restaurant &amp; Meeting Place</p>
+  </div>
+  <p>&copy; 2025 Spices Annex. All rights reserved.</p>
+  <div class="social-links">
+    <!-- Update href with your actual social media URLs -->
+    <a href="#" title="Facebook">f</a>
+    <a href="#" title="Instagram">in</a>
+    <a href="#" title="WhatsApp">W</a>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile menu
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.add('open');
+  });
+  document.getElementById('mobileClose').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.remove('open');
+  });
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.remove('open');
+    });
+  });
+
+  // Menu tabs
+  function switchTab(btn, tabId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + tabId).classList.add('active');
+  }
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
